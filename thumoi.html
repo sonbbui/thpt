@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Mời Họp Lớp 20 Năm Ngày Ra Trường - THPT Ngọc Lặc</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif, Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .invitation-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 2px solid #d4af37;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .hero-banner {
+            background: linear-gradient(rgba(15, 32, 39, 0.8), rgba(15, 32, 39, 0.8)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=600&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+            padding: 40px 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+        .hero-banner h1 {
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+            color: #d4af37;
+        }
+        .hero-banner .subtitle {
+            font-style: italic;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .badge {
+            display: inline-block;
+            border: 1px solid #d4af37;
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #d4af37;
+            text-transform: uppercase;
+        }
+        .content {
+            padding: 40px 30px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        .salutation {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #0f2027;
+        }
+        .main-text {
+            font-size: 16px;
+            text-align: justify;
+            margin-bottom: 30px;
+            text-indent: 20px;
+        }
+        .info-box {
+            background-color: #f9f6f0;
+            border-left: 4px solid #d4af37;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        .info-item {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .info-item strong {
+            color: #0f2027;
+            display: inline-block;
+            width: 100px;
+        }
+        .decor-line {
+            width: 80px;
+            height: 1px;
+            background: #d4af37;
+            margin: 20px auto;
+        }
+
+        /* --- KHU VỰC BÌNH LUẬN --- */
+        .comments-section {
+            background-color: #ffffff;
+            border-top: 2px dashed #d4af37;
+            padding: 30px;
+        }
+        .comments-section h3 {
+            color: #0f2027;
+            font-size: 20px;
+            margin-top: 0;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .comment-form {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .comment-form input, .comment-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+        .comment-form textarea { height: 90px; resize: none; }
+        .btn-submit {
+            background-color: #0f2027;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .btn-submit:hover { background-color: #d4af37; color: #0f2027; }
+        
+        .comments-list {
+            text-align: left;
+            max-height: 450px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        /* Thanh cuộn đẹp cho hộp bình luận */
+        .comments-list::-webkit-scrollbar { width: 6px; }
+        .comments-list::-webkit-scrollbar-thumb { background-color: #d4af37; border-radius: 4px; }
+
+        .comment-item {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 15px 0;
+            animation: fadeIn 0.5s ease;
+        }
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .comment-author {
+            font-weight: bold;
+            color: #0f2027;
+            font-size: 15px;
+        }
+        .comment-time {
+            font-size: 12px;
+            color: #999;
+        }
+        .comment-text {
+            font-size: 14px;
+            color: #555;
+            font-family: Arial, sans-serif;
+            white-space: pre-line;
+        }
+        .no-comment {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            padding: 20px 0;
+        }
+        .footer {
+            background-color: #0f2027;
+            color: #a0a0a0;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            border-top: 1px solid #d4af37;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invitation-card">
+        <div class="hero-banner">
+            <h1>Thư Mời Họp Lớp</h1>
+            <div class="subtitle">THPT Ngọc Lặc - Niên khóa 2002 - 2005</div>
+            <div class="badge">20 Năm Ngày Trở Về</div>
+        </div>
+
+        <div class="content">
+            <div class="salutation">Kính gửi: Quý Thầy Cô và Toàn thể Bạn học thân mến,</div>
+            <div class="decor-line"></div>
+            <div class="main-text">
+                Thấm thoát đã 20 năm trôi qua kể từ ngày chúng ta rời xa mái trường THPT Ngọc Lặc thân yêu... Hãy cùng trở về để ôn lại những kỷ niệm cũ, gắn kết tình bạn bè và tỏ lòng tri ân sâu sắc đến những người đưa đò thầm lặng năm xưa.
+            </div>
+            <div class="info-box">
+                <div class="info-item"><strong>Thời gian:</strong> 08:00 - Chủ Nhật, Ngày... Tháng... Năm 2026</div>
+                <div class="info-item"><strong>Địa điểm:</strong> Hội trường lớn, THPT Ngọc Lặc, Thanh Hóa</div>
+            </div>
+        </div>
+
+        <div class="comments-section">
+            <h3>Kỷ Niệm & Lời Nhắn Gửi</h3>
+            
+            <form class="comment-form" id="commentForm">
+                <input type="text" id="authorName" placeholder="Họ và tên & Lớp cũ (Ví dụ: Nguyễn Văn A - 12A1)" required>
+                <textarea id="commentContent" placeholder="Để lại lời nhắn, kỷ niệm cũ hoặc lời chúc của bạn..." required></textarea>
+                <button type="submit" class="btn-submit" id="submitBtn">Gửi Lời Nhắn</button>
+            </form>
+
+            <div class="comments-list" id="commentsList">
+                <div class="no-comment" id="loadingText">Đang tải các lời nhắn...</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Trân trọng,<br><strong>Ban Liên Lạc Khóa Kỷ Niệm THPT Ngọc Lặc</strong></p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getDatabase, ref, push, set, onValue } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+        // 🌟 THAY THÔNG TIN CẤU HÌNH FIREBASE CỦA BẠN VÀO ĐÂY 🌟
+        const firebaseConfig = {
+            apiKey: "MÃ_API_CỦA_BẠN",
+            authDomain: "TÊN_DỰ_ÁN.firebaseapp.com",
+            databaseURL: "https://TÊN_DỰ_ÁN-default-rtdb.firebaseio.com",
+            projectId: "TÊN_DỰ_ÁN",
+            storageBucket: "TÊN_DỰ_ÁN.appspot.com",
+            messagingSenderId: "ID_SENDER",
+            appId: "ID_APP"
+        };
+
+        // Khởi tạo Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const commentsRef = ref(db, 'comments');
+
+        const commentForm = document.getElementById('commentForm');
+        const commentsList = document.getElementById('commentsList');
+
+        // Hàm định dạng thời gian đơn giản
+        function formatTime(timestamp) {
+            const date = new Date(timestamp);
+            return `${date.getDate()}/${date.getMonth() + 1} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+        }
+
+        // Lắng nghe dữ liệu thay đổi trên Firebase (Hiển thị bình luận)
+        onValue(commentsRef, (snapshot) => {
+            commentsList.innerHTML = '';
+            const data = snapshot.val();
+            
+            if (data) {
+                // Chuyển object thành array và sắp xếp từ mới nhất đến cũ nhất
+                const sortedComments = Object.keys(data).map(key => data[key]).sort((a, b) => b.timestamp - a.timestamp);
+                
+                sortedComments.forEach(comment => {
+                    const commentItem = document.createElement('div');
+                    commentItem.className = 'comment-item';
+                    commentItem.innerHTML = `
+                        <div class="comment-header">
+                            <span class="comment-author">${escapeHtml(comment.author)}</span>
+                            <span class="comment-time">${formatTime(comment.timestamp)}</span>
+                        </div>
+                        <div class="comment-text">${escapeHtml(comment.text)}</div>
+                    `;
+                    commentsList.appendChild(commentItem);
+                });
+            } else {
+                commentsList.innerHTML = '<div class="no-comment">Chưa có lời nhắn nào. Hãy là người đầu tiên gửi lời chúc!</div>';
+            }
+        });
+
+        // Xử lý gửi bình luận lên Firebase
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const author = document.getElementById('authorName').value.trim();
+            const text = document.getElementById('commentContent').value.trim();
+            
+            if (author && text) {
+                const newCommentRef = push(commentsRef);
+                set(newCommentRef, {
+                    author: author,
+                    text: text,
+                    timestamp: Date.now()
+                }).then(() => {
+                    // Xóa trắng form sau khi gửi thành công
+                    document.getElementById('commentContent').value = '';
+                }).catch((error) => {
+                    alert("Có lỗi xảy ra khi gửi bình luận: " + error.message);
+                });
+            }
+        });
+
+        // Hàm chống mã độc XSS (Bảo mật cơ bản)
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+    </script>
+</body>
+</html>
