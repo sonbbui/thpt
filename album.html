@@ -258,7 +258,9 @@
 </div>
 
 <script>
-    // Tự động phát nhạc khi có tương tác (giống index)
+    // ========================================================
+    // 1. TỰ ĐỘNG PHÁT NHẠC KHI TƯƠNG TÁC (Giữ nguyên)
+    // ========================================================
     window.addEventListener('click', function() {
         var audio = document.getElementById('bg-music');
         if (audio.paused) { audio.play(); }
@@ -269,7 +271,9 @@
         if (audio.paused) { audio.play(); }
     }, { once: true });
 
-    // Hiệu ứng Hoa Phượng Rơi
+    // ========================================================
+    // 2. HIỆU ỨNG HOA PHƯỢNG RƠI (Giữ nguyên)
+    // ========================================================
     function createPetal() {
         const petal = document.createElement('div');
         petal.classList.add('petal');
@@ -290,25 +294,73 @@
     }
     setInterval(createPetal, 300);
 
-    // Xử lý đóng mở Lightbox phóng to ảnh
+    // ========================================================
+    // 3. XỬ LÝ LIGHTBOX TỰ ĐỘNG CHUYỂN ẢNH (NÂNG CẤP MỚI)
+    // ========================================================
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCap = document.getElementById('lightbox-caption');
+    
+    let currentImageIndex = 0; // Lưu vị trí ảnh hiện tại
+    let slideshowTimer = null; // Biến quản lý thời gian tự động chuyển
+    const TIME_NEXT = 3000;    // Thời gian chuyển ảnh (3000ms = 3 giây). Bạn có thể đổi thành 4000 hoặc 5000 tùy ý.
 
-    function openLightbox(element) {
-        const img = element.querySelector('img');
-        const caption = element.querySelector('.photo-caption');
+    // Hàm cập nhật nội dung hiển thị trong Lightbox dựa vào Index
+    function updateLightboxContent() {
+        const allPhotoItems = document.querySelectorAll('.photo-grid .photo-item');
+        
+        // Nếu index vượt quá số lượng ảnh thì quay về ảnh đầu tiên (vòng lặp)
+        if (currentImageIndex >= allPhotoItems.length) {
+            currentImageIndex = 0;
+        }
+        
+        const targetElement = allPhotoItems[currentImageIndex];
+        const img = targetElement.querySelector('img');
+        const caption = targetElement.querySelector('.photo-caption');
         
         lightboxImg.src = img.src;
         lightboxCap.innerText = caption.innerText;
-        lightbox.classList.add('active');
     }
 
+    // Hàm mở Lightbox khi click vào 1 item ảnh cụ thể
+    function openLightbox(element) {
+        const allPhotoItems = Array.from(document.querySelectorAll('.photo-grid .photo-item'));
+        // Tìm xem ảnh vừa click đang đứng thứ mấy trong danh sách lưới ảnh
+        currentImageIndex = allPhotoItems.indexOf(element);
+        
+        // Hiển thị ảnh lên
+        updateLightboxContent();
+        lightbox.classList.add('active');
+        
+        // BẮT ĐẦU kích hoạt bộ đếm thời gian tự động chuyển ảnh
+        startSlideshow();
+    }
+
+    // Hàm khởi chạy bộ đếm thời gian
+    function startSlideshow() {
+        // Xóa timer cũ nếu có để tránh bị xung đột chạy nhanh dồn dập
+        clearInterval(slideshowTimer); 
+        
+        slideshowTimer = setInterval(function() {
+            currentImageIndex++; // Tăng vị trí lên 1 để nhảy sang ảnh kế tiếp
+            updateLightboxContent(); // Cập nhật nội dung ảnh mới lên màn hình
+        }, TIME_NEXT);
+    }
+
+    // Hàm đóng Lightbox và HỦY bộ đếm thời gian
     function closeLightbox() {
         lightbox.classList.remove('active');
+        clearInterval(slideshowTimer); // Dừng hẳn việc tự động chuyển ảnh khi đã tắt khung nhìn lớn
     }
 
-    // Chống click chuột phải
+    // Ngăn chặn đóng lightbox khi người dùng bấm trực tiếp vào bức ảnh lớn (chỉ đóng khi bấm ra ngoài nền đen hoặc dấu x)
+    lightboxImg.addEventListener('click', function(e) {
+        e.stopPropagation(); 
+    });
+
+    // ========================================================
+    // 4. BẢO MẬT: CHỐNG CLICK CHUỘT PHẢI (Giữ nguyên)
+    // ========================================================
     window.addEventListener('contextmenu', function (e) {
         e.preventDefault();
     }, false);
