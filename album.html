@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Kỷ Niệm 20 Năm Ngày Ra Trường</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 14pt;
+            color: #3a2e2b;
+            background-color: #fcefe3;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='font-size:18px'><text y='18'>❤️</text></svg>"), auto;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding-bottom: 80px; /* Tránh bị che bởi trình phát nhạc */
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #ffffff;
+            color: #800000;
+            border: 2px solid #b3925c;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .btn-back:hover {
+            background-color: #800000;
+            color: #ffffff;
+            border-color: #800000;
+        }
+
+        .album-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .album-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 38pt;
+            font-weight: bold;
+            color: #800000;
+            margin: 0 0 10px 0;
+        }
+        .album-subtitle {
+            font-size: 16pt;
+            color: #614e43;
+            margin: 0;
+        }
+        .divider {
+            width: 30%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #b3925c, transparent);
+            margin: 15px auto;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 10px;
+        }
+
+        .photo-item {
+            background-color: #ffffff;
+            padding: 15px 15px 30px 15px;
+            border-radius: 4px;
+            box-shadow: 0 8px 20px rgba(128, 0, 0, 0.08);
+            border: 1px solid rgba(179, 146, 92, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .photo-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(128, 0, 0, 0.15);
+        }
+        .photo-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 2px;
+            border: 1px solid #f5ece1;
+        }
+        .photo-caption {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14pt;
+            color: #4a3b32;
+        }
+
+        /* Lightbox phóng to ảnh */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .lightbox-content {
+            max-width: 85%;
+            max-height: 80%;
+            border: 4px solid #fff;
+            border-radius: 4px;
+        }
+        .lightbox-caption {
+            position: absolute;
+            bottom: 5%;
+            color: #fff;
+            font-size: 18pt;
+            text-align: center;
+            width: 100%;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Trình điều khiển nhạc (Giống trang index) */
+        .audio-player-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(128, 0, 0, 0.85);
+            padding: 8px 15px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 999;
+        }
+        .audio-player-container audio {
+            height: 30px;
+            outline: none;
+        }
+
+        /* Cánh Hoa Phượng Rơi */
+        .petal {
+            position: fixed;
+            background-color: #ff3a3a;
+            border-radius: 50% 0 50% 50%;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-20px) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(105vh) rotate(720deg) translateX(100px); opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 15px; }
+            .album-title { font-size: 28pt; }
+            .photo-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+            .photo-item img { height: 180px; }
+            .audio-player-container { bottom: 10px; left: 10px; padding: 5px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="thiep3.html" class="btn-back">⬅ Quay lại</a>
+
+    <div class="album-header">
+        <h1 class="album-title">Góc Kỷ Niệm Thanh Xuân</h1>
+        <p class="album-subtitle">Những khoảnh khắc vô giá thời học sinh (2003 - 2006)</p>
+        <div class="divider"></div>
+    </div>
+
+   <div class="photo-grid">
+        
+        <div class="photo-item" onclick="openLightbox(this)">
+            <img src="https://github.com/user-attachments/assets/37386dd3-ed92-4c3d-a07c-6c41fa798239" alt="Cô Hương">
+            <div class="photo-caption">Cô Hương...</div>
+        </div>
+
+        <div class="photo-item" onclick="openLightbox(this)">
+            <img src="https://github.com/user-attachments/assets/d84fd599-8386-44b6-9c53-5366a9900a71" alt="Lớp A10 năm ấy">
+            <div class="photo-caption">Các thanh niên A10 năm 2005</div>
+        </div>
+
+        <div class="photo-item" onclick="openLightbox(this)">
+            <img src="https://picsum.photos/id/1018/600/400" alt="Giờ tan trường">
+            <div class="photo-caption">Tà áo trắng bay dưới bóng phượng</div>
+        </div>
+
+        <div class="photo-item" onclick="openLightbox(this)">
+            <img src="https://picsum.photos/id/1025/600/400" alt="Lưu bút ngày xanh">
+            <div class="photo-caption">Những dòng lưu bút nghẹn ngào</div>
+        </div>
+
+        <div class="photo-item" onclick="openLightbox(this)">
+            <img src="https://picsum.photos/id/1035/600/400" alt="Thầy cô và bạn bè">
+            <div class="photo-caption">Tri ân thầy cô niên khóa 03-06</div>
+        </div>
+
+        <div class="photo-item" onclick="openLightbox(this)">
+            <img src="https://github.com/user-attachments/assets/56a971e3-8143-470c-8efd-6f260917cc0b" alt="Nụ cười rực rỡ">
+            <div class="photo-caption">Nụ cười còn mãi với thời gian</div>
+        </div>
+
+    </div>
+</div>
+
+<div class="audio-player-container">
+    <span style="color: white; font-size: 11pt; font-weight: bold; margin-right: 10px; font-family: 'Patrick Hand', cursive;">♫ Mình cùng nhau đóng băng (Thùy Chi)</span>
+    <audio id="bg-music" controls loop>
+        <source src="cndb.mp3" type="audio/mpeg">
+        Trình duyệt của bạn không hỗ trợ phát âm thanh.
+    </audio>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<script>
+    // Tự động phát nhạc khi có tương tác (giống index)
+    window.addEventListener('click', function() {
+        var audio = document.getElementById('bg-music');
+        if (audio.paused) { audio.play(); }
+    }, { once: true });
+
+    window.addEventListener('touchstart', function() {
+        var audio = document.getElementById('bg-music');
+        if (audio.paused) { audio.play(); }
+    }, { once: true });
+
+    // Hiệu ứng Hoa Phượng Rơi
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        
+        const size = Math.random() * 8 + 6; 
+        petal.style.width = `${size}px`;
+        petal.style.height = `${size * 1.4}px`;
+        petal.style.left = Math.random() * window.innerWidth + 'px';
+        
+        const duration = Math.random() * 5 + 4;
+        petal.style.animationDuration = `${duration}s`;
+        
+        const colors = ['#ff3a3a', '#ff4d4d', '#e62e2e', '#ff5722'];
+        petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        document.body.appendChild(petal);
+        setTimeout(() => { petal.remove(); }, duration * 1000);
+    }
+    setInterval(createPetal, 300);
+
+    // Xử lý đóng mở Lightbox phóng to ảnh
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCap = document.getElementById('lightbox-caption');
+
+    function openLightbox(element) {
+        const img = element.querySelector('img');
+        const caption = element.querySelector('.photo-caption');
+        
+        lightboxImg.src = img.src;
+        lightboxCap.innerText = caption.innerText;
+        lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+    }
+
+    // Chống click chuột phải
+    window.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    }, false);
+</script>
+
+</body>
+</html>
